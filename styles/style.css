@@ -26,7 +26,7 @@ a {
 }
 
 a:hover {
-  text-decoration: underline;
+  border-bottom: 1px solid var(--main-text-color);
 }
 
 a:focus {
@@ -39,7 +39,6 @@ header {
   grid-template-rows: min-content 1fr min-content;
   block-size: 100vh;
   min-block-size: 668px;
-  margin-block: 10px;
 }
 
 .header > *:first-child {
@@ -61,21 +60,22 @@ header {
 }
 
 .decorated-zone::before {
-  bottom: 0;
+  bottom: 10px;
   left: 0;
-  border-bottom: 1px solid var(--accent-color);
-  border-left: 1px solid var(--accent-color);
+  border-bottom: 1px solid var(--title-color);
+  border-left: 1px solid var(--title-color);
 }
 
 .decorated-zone::after {
-  top: 0;
+  top: 10px;
   right: 0;
-  border-top: 1px solid var(--accent-color);
-  border-right: 1px solid var(--accent-color);
+  border-top: 1px solid var(--title-color);
+  border-right: 1px solid var(--title-color);
 }
 
 .header__decorated-element {
   position: absolute;
+  top: 10px;
   right: 1px;
   display: flex;
   justify-content: flex-end;
@@ -104,16 +104,17 @@ header {
 }
 
 .header__theme-menu-button {
+  text-transform: lowercase;
   background-color: transparent;
   border: none;
   cursor: pointer;
-  color: var(--accent-color);
+  color: var(--button-color);
   block-size: 26px;
   inline-size: 70px;
 }
 
 .header__theme-menu-button:hover {
-  border: 1px solid var(--accent-color);
+  border: 1px solid var(--acccent-rgb);
 }
 
 .header__theme-menu-button:focus {
@@ -129,12 +130,13 @@ header {
 .header__title {
   display: flex;
   justify-content: start;
+  align-self: flex-end;
 }
 
 .header__title,
 .footer__title {
   color: var(--h1-color);
-  font-size: var(--h1-font-size);
+  font-size: var(--large-font-size-mobile);
   line-height: var(--thin-line-height);
   font-weight: var(--bold-font-weight);
   font-family: var(--font-family);
@@ -150,7 +152,7 @@ header {
 
 .title-decor {
   background-color: var(--accent-color);
-  color: var(--bg-color);
+  color: var(--text-color);
 }
 
 .header__subtitle,
@@ -163,19 +165,15 @@ header {
 }
 
 .header__subtitle {
-  max-block-size: 117px;
   margin-block: 55px 66px;
+  block-size: min-content;
 }
 
 .main__title {
   font-size: var(--font-size);
-  color: var(--accent-color);
+  color: var(--title-color);
   font-weight: var(--bold-font-weight);
-  margin-block-start: 50px;
-}
-
-.main__subtitle {
-  max-block-size: 23px;
+  margin-block-start: 30px;
 }
 
 .main__subsubtitle {
@@ -188,8 +186,8 @@ header {
   font-size: var(--font-size);
 }
 
-.main {
-  margin-block: 40px;
+.container__no-split {
+  margin-block: 50px;
 }
 
 .main__picture-subtitle {
@@ -229,7 +227,6 @@ header {
 }
 
 .footer {
-  margin-block: 10px;
   min-block-size: 668px;
   block-size: 100vh;
   display: flex;
@@ -252,7 +249,17 @@ header {
 
 @media (min-width: 768px) {
   .page {
-    padding: 20px;
+    padding: 0;
+  }
+
+  .header__title,
+  .footer__title {
+    font-size: var(--large-font-size-desktop);
+  }
+
+  .header__decorated-element {
+    top: 20px;
+    right: 20px;
   }
 
   .header {
@@ -263,16 +270,29 @@ header {
     display: flex;
     justify-self: end;
     margin-block: 162px 0;
+    margin-inline-end: 20px;
     inline-size: 50%;
     text-align: right;
   }
 
   .header__theme-menu {
     margin-block-start: 182px;
+    margin-inline-end: 20px;
+  }
+
+  .decorated-zone::before {
+    bottom: 20px;
+    left: 20px;
+  }
+
+  .decorated-zone::after {
+    top: 20px;
+    right: 20px;
   }
 
   .main {
     margin-block: 50px 60px;
+    margin-inline: 20px;
   }
 
   .main__title {
@@ -385,7 +405,7 @@ header {
     grid-row: 1;
     justify-self: center;
     align-self: start;
-    margin-block-start: 0;
+    margin-block-start: 20px;
     block-size: min-content;
   }
 
@@ -394,10 +414,19 @@ header {
     gap: 10px;
   }
 
+  .container__split {
+    grid-template-columns: 315px 1fr;
+  }
+
   .container__no-split {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 47px 1fr;
+    column-gap: 20px;
+  }
+
+  .container__split .main__subtitle {
+    margin-block-end: 20px;
   }
 
   .container__no-split .main__title {
@@ -408,5 +437,6 @@ header {
 
   .gallery {
     grid-template-rows: 260px 315px 433px;
+    block-size: 1048px;
   }
 }
